@@ -36,19 +36,13 @@ namespace LibraryRestApi.Service
 
         public void DeleteBookCopy(long id)
         {
-            try
+            var rental = _context.BookRentals.Where(r => r.BookCopy.Id == id).ToList();
+            if (!rental.Any())
             {
                 var bookCoopy = _context.BookCopys.FirstOrDefault(b => b.Id == id);
                 _context.Remove(bookCoopy);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-            
         }
     }
 }

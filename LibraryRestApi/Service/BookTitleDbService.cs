@@ -28,9 +28,14 @@ namespace LibraryRestApi.Service
 
         public void DeleteReader(long id)
         {
-            var bookTitle = _context.BookTitles.FirstOrDefault(b => b.Id == id);
-            _context.BookTitles.Remove(bookTitle);
-            _context.SaveChanges();
+            var copy = _context.BookCopys.Where(t => t.BookTitle.Id == id);
+            if (!copy.Any())
+            {
+                var bookTitle = _context.BookTitles.FirstOrDefault(b => b.Id == id);
+                _context.BookTitles.Remove(bookTitle);
+                _context.SaveChanges();
+            }
+
         }
 
         public async Task<BookTitle> GetBookTitleByAuthorAndTitle(string author, string title) => await _context.BookTitles.FirstOrDefaultAsync(t => t.Title == title && t.Author == author);

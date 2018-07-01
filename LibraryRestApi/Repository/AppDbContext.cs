@@ -15,18 +15,5 @@ namespace LibraryRestApi.Repository
         public DbSet<BookRental> BookRentals { get; set; }
         public DbSet<Reader> Readers { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<BookCopy>()
-            //    .HasMany(b => b.BookRentals)
-            //    .WithOne(t => t.BookCopy)
-            //    .HasForeignKey(x=>x.BookCopyId)
-            //    .IsRequired(false)
-            //    .OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<BookCopy>()
-                .HasMany(b => b.BookRentals)
-                .WithOne(t => t.BookCopy)
-                .OnDelete(DeleteBehavior.);
-        }
     }
 }

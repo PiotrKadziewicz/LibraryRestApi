@@ -11,7 +11,7 @@ using System;
 namespace LibraryRestApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180701162405_Library")]
+    [Migration("20180701183305_Library")]
     partial class Library
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

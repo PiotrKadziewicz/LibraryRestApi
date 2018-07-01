@@ -27,9 +27,13 @@ namespace LibraryRestApi.Service
 
         public void DeleteReader(long id)
         {
-            var reader = _context.Readers.FirstOrDefault(r => r.Id == id);
-            _context.Readers.Remove(reader);
-            _context.SaveChanges();
+            var rental = _context.BookRentals.Where(r => r.Reader.Id == id);
+            if (!rental.Any())
+            {
+                var reader = _context.Readers.FirstOrDefault(r => r.Id == id);
+                _context.Readers.Remove(reader);
+                _context.SaveChanges();
+            }
         }
     }
 }
