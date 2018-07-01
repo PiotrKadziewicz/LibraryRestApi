@@ -24,7 +24,7 @@ namespace LibraryRestApi.Service
 
             if (bookTitle != null)
             {
-                ISet<BookCopy> freeBooks = _context.BookCopys.Where(c => c.BookTitleId == bookTitle.Id && c.Status == "Free").ToHashSet();
+                ISet<BookCopy> freeBooks = _context.BookCopys.Where(c => c.BookTitle.Id == bookTitle.Id && c.Status == "Free").ToHashSet();
                 var reader = await _context.Readers.FirstOrDefaultAsync(r => r.Id == addBookRentalDto.UserId);
                 if (freeBooks.Any() && reader.Account >= 3)
                 {
@@ -41,7 +41,7 @@ namespace LibraryRestApi.Service
 
         public async Task<BookRental> ReturnByBookAndUser(long bookId, long readerId)
         {
-            var bookRental = await _context.BookRentals.FirstOrDefaultAsync(r => r.BookCopyId == bookId && r.ReaderId == readerId);
+            var bookRental = await _context.BookRentals.FirstOrDefaultAsync(r => r.BookCopy.Id == bookId && r.Reader.Id == readerId);
             bookRental.ReturnDate = DateTime.Now;
             var diff = bookRental.RentDate.Subtract(bookRental.ReturnDate).TotalDays;
             var reader = await _context.Readers.FirstOrDefaultAsync(r => r.Id == readerId);

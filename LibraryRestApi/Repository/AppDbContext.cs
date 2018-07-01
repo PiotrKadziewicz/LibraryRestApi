@@ -17,16 +17,16 @@ namespace LibraryRestApi.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<BookCopy>()
-            //    .HasMany(b => b.BookRentals)
-            //    .WithOne(t => t.BookCopy)
-            //    .HasForeignKey(x=>x.BookCopyId)
-            //    .IsRequired(false)
-            //    .OnDelete(DeleteBehavior.SetNull);
+            //    //modelBuilder.Entity<BookCopy>()
+            //    //    .HasMany(b => b.BookRentals)
+            //    //    .WithOne(t => t.BookCopy)
+            //    //    .HasForeignKey(x=>x.BookCopyId)
+            //    //    .IsRequired(false)
+            //    //    .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<BookCopy>()
-                .HasMany(b => b.BookRentals)
-                .WithOne(t => t.BookCopy)
-                .OnDelete(DeleteBehavior.);
+            .HasMany(b => b.BookRentals)
+            .WithOne(t => t.BookCopy)
+            .OnDelete(DeleteBehavior.SetNull);
         }
-    }
+}
 }

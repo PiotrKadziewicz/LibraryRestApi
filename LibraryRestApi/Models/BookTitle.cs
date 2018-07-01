@@ -9,15 +9,18 @@ namespace LibraryRestApi.Models
 {
     public class BookTitle
     {
+        public BookTitle()
+        {
+        }
 
-        [Key]
+        //[Key]
         public long Id { get; set; }
-        [Required]
+        //[Required]
         public string Title { get; set; }
-        [Required]
+        //[Required]
         public string Author { get; set; }
-        [Required]
+        //[Required]
         public int PublicationYear { get; set; }
-        public virtual ICollection<BookCopy> BookCopies { get; set; }
+        public ICollection<BookCopy> BookCopies { get; set; }
     }
 }

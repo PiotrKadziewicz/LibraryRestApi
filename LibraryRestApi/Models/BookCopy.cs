@@ -20,15 +20,15 @@ namespace LibraryRestApi.Models
             BookTitle = bookTitle;
         }
 
-        [Key]
+        //[Key]
         public long Id { get; set; }
 
-        [Required]
+        //[Required]
         public string Status { get; set; }
 
-        public long BookTitleId { get; set; }
-        [ForeignKey("BookTitleId")]
-        public virtual BookTitle BookTitle { get; set; }
+        //public long BookTitleId { get; set; }
+        //[ForeignKey("BookTitleId")]
+        public BookTitle BookTitle { get; set; }
         public ICollection<BookRental> BookRentals { get; set; }
     }
 }

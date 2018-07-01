@@ -10,14 +10,14 @@ namespace LibraryRestApi.Models
     {
         public Reader() { }
 
-        [Key]
+        //[Key]
         public long Id { get; set; }
-        [Required]
+        //[Required]
         public string Name { get; set; }
-        [Required]
+        //[Required]
         public string LastName { get; set; }
-        [Required]
+        //[Required]
         public decimal Account { get; set; }
-        public virtual ICollection<BookRental> BookRentals { get; set; }
+        public ICollection<BookRental> BookRentals { get; set; }
     }
 }
