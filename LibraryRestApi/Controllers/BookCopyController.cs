@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryRestApi.Controllers
 {
     [Produces("application/json")]
-    
     public class BookCopyController : Controller
     {
         private readonly IBookCopyRepository _repo;

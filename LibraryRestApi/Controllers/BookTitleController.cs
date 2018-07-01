@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryRestApi.Controllers
 {
-    [Route("api/[controller]")]    [Produces("application/json")]
-
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     public class BookTitleController : Controller
     {
         private readonly IBooktTitleRepository _repo;

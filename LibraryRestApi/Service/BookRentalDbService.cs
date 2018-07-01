@@ -15,8 +15,7 @@ namespace LibraryRestApi.Service
         private readonly AppDbContext _context;
         public BookRentalDbService(AppDbContext context) => _context = context;
 
-        public async Task<ICollection<BookRental>> GetAll() => await _context.BookRentals.Include(r => r.BookCopy).Include(t => t.Reader).ToListAsync();
-
+        public async Task<ICollection<BookRental>> GetAll() => await _context.BookRentals.Include(s=>s.BookCopy).Include(r => r.BookCopy.BookTitle).Include(t => t.Reader).ToListAsync();
 
         public async Task<BookRental> AddRental(AddBookRentalDto addBookRentalDto)
         {
