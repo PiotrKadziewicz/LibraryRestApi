@@ -11,7 +11,7 @@ using System;
 namespace LibraryRestApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180630193240_Library")]
+    [Migration("20180701162405_Library")]
     partial class Library
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,8 @@ namespace LibraryRestApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("BookCopyId");
+                    b.Property<long?>("BookCopyId")
+                        .IsRequired();
 
                     b.Property<long>("ReaderId");
 

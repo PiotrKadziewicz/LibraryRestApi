@@ -18,7 +18,9 @@ namespace LibraryRestApi.Helpers
             CreateMap<BookTitleDto, BookTitle>();
             CreateMap<BookCopy, BookCopyDto>()
                 .ForMember(dest => dest.BookTitleDto, opts => opts.MapFrom(src => src.BookTitle));
-            CreateMap<BookRental, BookRentalDto>();
+            CreateMap<BookRental, BookRentalDto>()
+                .ForMember(dest => dest.ReaderDto, opts =>opts.MapFrom((src=>src.Reader)))
+                .ForMember(dest=>dest.BookCopyDto, opts=>opts.MapFrom((src=>src.BookCopy)));
         }
     }
 }

@@ -18,6 +18,6 @@ namespace LibraryRestApi.Models
         public string Author { get; set; }
         [Required]
         public int PublicationYear { get; set; }
-        public ICollection<BookCopy> BookCopies { get; set; }
+        public virtual ICollection<BookCopy> BookCopies { get; set; }
     }
 }

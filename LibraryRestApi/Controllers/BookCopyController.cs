@@ -28,14 +28,11 @@ namespace LibraryRestApi.Controllers
 
         [HttpGet]
         [Route("api/[controller]")]
-        public async Task<ICollection<BookCopyDto>> GetAllBookCopies()
-        {
-            return _mapper.Map<ICollection<BookCopy>, ICollection<BookCopyDto>>(await _repo.GetAllBooks());
-        }
+        public async Task<ICollection<BookCopyDto>> GetAllBookCopies() => _mapper.Map<ICollection<BookCopy>, ICollection<BookCopyDto>>(await _repo.GetAllBooks());
 
-        
+
         [HttpGet]
-        [Route("api/[controller]/GET")]
+        [Route("api/[controller]/Get")]
         public async Task<long> GetByStatusAndAuthorAndTitle([FromQuery] string status, [FromQuery] string author, [FromQuery] string title)
         {
             var bookTitle = await _titleRepo.GetBookTitleByAuthorAndTitle(author, title);
@@ -43,25 +40,15 @@ namespace LibraryRestApi.Controllers
             {
                 return await _repo.CountByStatusAndTitle("Free", bookTitle.Id);
             }
-
             return 0;
         }
 
+        [HttpGet]
+        [Route("api/[controller]/GetByStatus")]
+        public async Task<ICollection<BookCopy>> GetFreeCopies([FromQuery] string status, [FromQuery] long id) => await _repo.GetAllByStatusAndTitle(status, id);
 
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        [HttpDelete]
+        [Route("api/[controller]/{id}")]
+        public void Delete(long id) => _repo.DeleteBookCopy(id);
     }
 }

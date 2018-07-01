@@ -14,15 +14,9 @@ namespace LibraryRestApi.Service
 
         public ReaderDbService(AppDbContext context) => _context = context;
 
-        public async Task<ICollection<Reader>> GetAllReaders()
-        {
-            return await _context.Readers.ToListAsync();
-        }
+        public async Task<ICollection<Reader>> GetAllReaders() => await _context.Readers.ToListAsync();
 
-        public async Task<Reader> GetReader(long id)
-        {
-            return await _context.Readers.FirstOrDefaultAsync(r => r.Id == id);
-        }
+        public async Task<Reader> GetReader(long id) => await _context.Readers.FirstOrDefaultAsync(r => r.Id == id);
 
         public async Task<Reader> AddReader(Reader reader)
         {
@@ -34,8 +28,8 @@ namespace LibraryRestApi.Service
         public void DeleteReader(long id)
         {
             var reader = _context.Readers.FirstOrDefault(r => r.Id == id);
-                _context.Readers.Remove(reader);
-                _context.SaveChanges();
+            _context.Readers.Remove(reader);
+            _context.SaveChanges();
         }
     }
 }

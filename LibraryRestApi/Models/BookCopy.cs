@@ -20,8 +20,6 @@ namespace LibraryRestApi.Models
             BookTitle = bookTitle;
         }
 
-
-
         [Key]
         public long Id { get; set; }
 

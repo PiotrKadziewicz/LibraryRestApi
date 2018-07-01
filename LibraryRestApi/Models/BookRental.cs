@@ -9,6 +9,17 @@ namespace LibraryRestApi.Models
 {
     public class BookRental
     {
+        public BookRental()
+        {
+        }
+
+        public BookRental(DateTime rentDate, BookCopy bookCopy, Reader reader)
+        {
+            RentDate = rentDate;
+            BookCopy = bookCopy;
+            Reader = reader;
+        }
+
         [Key]
         public long Id { get; set; }
         [Required]
@@ -16,7 +27,7 @@ namespace LibraryRestApi.Models
         public DateTime ReturnDate { get; set; }
 
         [Required]
-        public long BookCopyId { get; set; }
+        public long? BookCopyId { get; set; }
         [ForeignKey("BookCopyId")]
         public virtual BookCopy BookCopy { get; set; }
 

@@ -46,7 +46,7 @@ namespace LibraryRestApi.Controllers
         [HttpPost]
         public async Task<BookTitleDto> AddBookTitle([FromBody] BookTitleDto bookTitleDto)
         {
-            var title = _repo.GetBookTitleByAuthorAndTitle(bookTitleDto.Title, bookTitleDto.Author).Result;
+            var title = _repo.GetBookTitleByAuthorAndTitle(bookTitleDto.Author, bookTitleDto.Title).Result;
             if (title != null)
             {
                 await _copyRepo.AddBook(new BookCopy("Free", title));

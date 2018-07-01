@@ -14,10 +14,7 @@ namespace LibraryRestApi.Service
 
         public BookCopyDbService(AppDbContext context) => _context = context;
 
-        public async Task<ICollection<BookCopy>> GetAllBooks()
-        {
-            return await _context.BookCopys.Include(t => t.BookTitle).ToListAsync();
-        }
+        public async Task<ICollection<BookCopy>> GetAllBooks() =>await _context.BookCopys.Include(t => t.BookTitle).ToListAsync();
 
         public async Task<BookCopy> GetBookCopy(long id)
         {
@@ -32,21 +29,26 @@ namespace LibraryRestApi.Service
             return bookCopy;
         }
 
-        public async Task<int> CountByStatusAndTitle(string status, long id)
-        {
-            return await Task.FromResult<int>(_context.BookCopys.Count(b => b.Status == status.ToLower() && b.Id == id));
-        }
+        public async Task<int> CountByStatusAndTitle(string status, long id) => await Task.FromResult<int>(_context.BookCopys.Count(b => b.Status == status.ToLower() && b.Id == id));
 
-        public async Task<ICollection<BookCopy>> GetAllByStatusAndTitle(string status, long id)
-        {
-            return await _context.BookCopys.Include(b=>b.Status==status && b.Id ==id).ToListAsync();
-        }
+        public async Task<ICollection<BookCopy>> GetAllByStatusAndTitle(string status, long id) => await _context.BookCopys.Include(b=>b.Status==status && b.Id ==id).ToListAsync();
+
 
         public void DeleteBookCopy(long id)
         {
-            var bookCoopy = _context.BookCopys.FirstOrDefaultAsync(b => b.Id == id);
-            _context.Remove(bookCoopy);
-            _context.SaveChanges();
+            try
+            {
+                var bookCoopy = _context.BookCopys.FirstOrDefault(b => b.Id == id);
+                _context.Remove(bookCoopy);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            
         }
     }
 }

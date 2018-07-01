@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using LibraryRestApi.Dtos;
+using LibraryRestApi.Models;
+using LibraryRestApi.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,36 +15,22 @@ namespace LibraryRestApi.Controllers
     [Route("api/BookRental")]
     public class BookRentalController : Controller
     {
-        // GET: api/BookRental
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IBookRentalRepository _repo;
+        private readonly IMapper _mapper;
+
+        public BookRentalController(IBookRentalRepository repo, IMapper mapper)
         {
-            return new string[] { "value1", "value2" };
+            _repo = repo;
+            _mapper = mapper;
         }
 
-        // GET: api/BookRental/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        
-        // POST: api/BookRental
+        [HttpGet]
+        public async Task<ICollection<BookRentalDto>> GetAll() => _mapper.Map<ICollection<BookRental>, ICollection<BookRentalDto>>(await _repo.GetAll());
+
         [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-        
-        // PUT: api/BookRental/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        public async Task<BookRentalDto> BorrowBook([FromQuery]string author, [FromQuery] string title, [FromQuery] long userId) => _mapper.Map<BookRental, BookRentalDto>(await _repo.AddRental(new AddBookRentalDto(author, title, userId)));
+
+        [HttpPost("json")]
+        public async Task<BookRentalDto> BorrowBookJson([FromBody]AddBookRentalDto addBookRentalDto) => _mapper.Map<BookRental, BookRentalDto>(await _repo.AddRental(addBookRentalDto));
     }
 }

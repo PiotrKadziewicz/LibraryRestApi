@@ -26,18 +26,10 @@ namespace LibraryRestApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<ReaderDto>> GetAllReaders()
-        {
-            var readers = await _repo.GetAllReaders();
-            return _mapper.Map<ICollection<Reader>, ICollection<ReaderDto>>(readers);
-        }
+        public async Task<ICollection<ReaderDto>> GetAllReaders() => _mapper.Map<ICollection<Reader>, ICollection<ReaderDto>>(await _repo.GetAllReaders());
 
         [HttpGet("{id}")]
-        public async Task<ReaderDto> GetUser(int id)
-        {
-            var reader = await _repo.GetReader(id);
-            return _mapper.Map<Reader, ReaderDto>(reader);
-        }
+        public async Task<ReaderDto> GetUser(int id) => _mapper.Map<Reader, ReaderDto>(await _repo.GetReader(id));
 
         [HttpPost]
         public async Task<ReaderDto> CreateReader([FromBody] ReaderDto readerDto)
@@ -47,9 +39,6 @@ namespace LibraryRestApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void  DeleteUser(long id)
-        {
-            _repo.DeleteReader(id);
-        }
+        public void DeleteUser(long id) => _repo.DeleteReader(id);
     }
 }

@@ -12,7 +12,7 @@ namespace LibraryRestApi.Dtos
         public long Id { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime ReturnDate { get; set; }
-        public BookCopy BookCopy { get; set; }
-        public Reader Reader { get; set; }
+        public BookCopyDto BookCopyDto { get; set; }
+        public ReaderDto ReaderDto{ get; set; }
     }
 }

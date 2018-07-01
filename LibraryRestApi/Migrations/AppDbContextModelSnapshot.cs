@@ -42,7 +42,8 @@ namespace LibraryRestApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("BookCopyId");
+                    b.Property<long?>("BookCopyId")
+                        .IsRequired();
 
                     b.Property<long>("ReaderId");
 
